@@ -22,6 +22,19 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(logger);
 
+// Root route
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Blog API Server is running',
+    version: '1.0.0',
+    endpoints: {
+      auth: '/api/auth',
+      blogs: '/api/blogs',
+      health: '/api/health'
+    }
+  });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/blogs', blogRoutes);
